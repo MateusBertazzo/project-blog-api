@@ -20,7 +20,16 @@ const registerUser = async (displayName, email, password, image) => {
   return { type: null, message: createUser.dataValues };
 };
 
+const getAllUsers = async () => {
+  const users = await User.findAll({
+    attributes: { exclude: ['password'] },
+  });
+
+  return { type: null, message: users };
+};
+
 module.exports = {
   loginUser,
   registerUser,
+  getAllUsers,
 };
