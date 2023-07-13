@@ -5,6 +5,7 @@ const validateNameAndEmail = (req, res, next) => {
     return res.status(400)
     .json({ message: '"displayName" length must be at least 8 characters long' });
   }
+  // REGEX DA INTERNET
   if (!email || !/\S+@\S+\.\S+/.test(email)) {
     return res.status(400)
     .json({ message: '"email" must be a valid email' });
