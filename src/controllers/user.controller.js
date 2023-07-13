@@ -27,6 +27,26 @@ const loginUser = async (req, res) => {
   res.status(200).json({ token });
 };
 
+const registerUser = async (req, res) => {
+  const { displayName, email, password, image } = req.body;
+
+  const { type, message } = await userService.registerUser(displayName, email, password, image);
+
+  if (type) {
+    return res.status(409).json({ message });
+  }
+
+  const payload = {
+    email: message.email,
+    id: message.id,
+  };
+
+  const token = TokenUser(payload);
+
+  return res.status(201).json({ token });
+};
+
 module.exports = {
   loginUser,
+  registerUser,
 };
