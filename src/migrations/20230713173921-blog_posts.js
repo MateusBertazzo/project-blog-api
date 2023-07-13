@@ -2,32 +2,32 @@
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    return queryInterface.createTable('blog_posts', {
+    await queryInterface.createTable('blog_posts', {
       id: {
         type: Sequelize.INTEGER,
-        allowNull: true,
+        allowNull: false,
         autoIncrement: true,
         primaryKey: true,
       },
       title: {
         type: Sequelize.STRING,
-        allowNull: true,
+        allowNull: false,
       },
       content: {
         type: Sequelize.STRING,
-        allowNull: true,
+        allowNull: false,
       },
       published: {
         type: Sequelize.DATE,
-        allowNull: true,
+        allowNull: false,
       },
       updated: {
         type: Sequelize.DATE,
-        allowNull: true,
+        allowNull: false,
       },
       user_id: {
         type: Sequelize.INTEGER,
-        allowNull: true,
+        allowNull: false,
         references: {
           model: 'users',
           key: 'id',
