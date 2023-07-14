@@ -2,7 +2,7 @@ const jwt = require('jsonwebtoken');
 
 const secret = process.env.JWT_SECRET;
 
-const authMiddleware = (req, res, next) => {
+const authMiddlewareCategory = (req, res, next) => {
   const authorizationToken = req.headers.authorization;
 
   if (!authorizationToken) {
@@ -10,7 +10,8 @@ const authMiddleware = (req, res, next) => {
   }
 
   try {
-    const token = authorizationToken.split(' ')[1];
+    const token = authorizationToken
+    .includes('bearer') ? authorizationToken.split(' ')[1] : authorizationToken;
 
     const message = jwt.verify(token, secret);
 
@@ -21,4 +22,4 @@ const authMiddleware = (req, res, next) => {
   }
 };
 
-module.exports = authMiddleware;
+module.exports = authMiddlewareCategory;
