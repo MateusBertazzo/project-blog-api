@@ -7,6 +7,7 @@ const authMiddleware = require('../middlewares/validateAuthorization');
 const router = express.Router();
 
 router.get('/', authMiddleware, userController.getAllUsers);
+router.get('/:id', authMiddleware, userController.getUserById);
 router.post('/', validateNameAndEmail, validatePassword, userController.registerUser);
 
 module.exports = router;
