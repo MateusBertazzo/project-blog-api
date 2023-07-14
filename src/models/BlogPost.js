@@ -31,7 +31,7 @@ module.exports = (sequelize, DataTypes) => {
   {
     timestamps: false,
     underscored: true,
-    tableName: 'categories'
+    tableName: 'blog_posts'
   })
   tableBlogPost.associate = (models) => {
     tableBlogPost.belongsTo(models.User, 
