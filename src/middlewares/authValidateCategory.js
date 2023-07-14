@@ -11,7 +11,7 @@ const authMiddlewareCategory = (req, res, next) => {
 
   try {
     const token = authorizationToken
-    .includes('bearer') ? authorizationToken.split(' ')[1] : authorizationToken;
+    .includes('Bearer') ? authorizationToken.split(' ')[1] : authorizationToken;
 
     const message = jwt.verify(token, secret);
 

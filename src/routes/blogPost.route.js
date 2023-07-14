@@ -6,5 +6,6 @@ const authMiddleware = require('../middlewares/validateAuthorization');
 const router = express.Router();
 
 router.get('/', authMiddleware, blogPostController.getAllPost);
+router.get('/:id', authMiddleware, blogPostController.getByIdPost);
 
 module.exports = router;
