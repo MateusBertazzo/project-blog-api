@@ -41,17 +41,17 @@ const getByIdPost = async (id) => {
   return { type: null, message: post };
 };
 
-const blogPostUpdate = async (idUserParam, dataBaseId, body) => {
-  const dataUser = await getByIdPost(dataBaseId);
+const blogPostUpdate = async (idUserToken, idUserParam, body) => {
+  const dataUser = await getByIdPost(idUserParam);
   if (!dataUser) {
     return { type: 'INVALID_ID', message: 'Invalid Id' };
   }
 
-  if (dataUser.userId !== idUserParam) {
+  if (dataUser.userId !== idUserToken) {
     return { type: 'PERMISSION_DENIED', message: 'Unauthorized user' };
   }
 
-  await BlogPost.update(body, { where: { dataBaseId } });
+  await BlogPost.update(body, { where: { idUserParam } });
 
   return { type: null, message: dataUser };
 };

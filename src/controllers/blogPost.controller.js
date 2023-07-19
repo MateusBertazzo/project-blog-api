@@ -18,7 +18,25 @@ const getByIdPost = async (req, res) => {
   return res.status(200).json(message);
 };
 
+const blogPostUpdate = async (req, res) => {
+  const { id: idUserToken } = req.user;
+  const { id } = req.params;
+  
+  const { type, message } = await blogPostService.blogPostUpdate(idUserToken, id, req.body);
+
+  if (type === 'INVALID_ID') {
+    return res.status(400).json({ message });
+  }
+
+  if (type === 'PERMISSION_DENIED') {
+    return res.status(401).json({ message });
+  }
+
+  res.status(200).json(message);
+};
+
 module.exports = {
   getAllPost,
   getByIdPost,
+  blogPostUpdate,
 };
