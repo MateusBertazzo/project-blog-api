@@ -19,14 +19,12 @@ const getByIdPost = async (req, res) => {
 };
 
 const blogPostUpdate = async (req, res) => {
-  const { id: idUserToken } = req.user;
-  const { id } = req.params;
+  const { id: userId } = req.user;
+  const { id: paramsId } = req.params;
+  const { title, content } = req.body;
+  const body = { title, content };
   
-  const { type, message } = await blogPostService.blogPostUpdate(idUserToken, id, req.body);
-
-  if (type === 'INVALID_ID') {
-    return res.status(400).json({ message });
-  }
+  const { type, message } = await blogPostService.blogPostUpdate(userId, paramsId, body);
 
   if (type === 'PERMISSION_DENIED') {
     return res.status(401).json({ message });

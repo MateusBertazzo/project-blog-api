@@ -41,19 +41,17 @@ const getByIdPost = async (id) => {
   return { type: null, message: post };
 };
 
-const blogPostUpdate = async (idUserToken, idUserParam, body) => {
-  const dataUser = await getByIdPost(idUserParam);
-  if (!dataUser) {
-    return { type: 'INVALID_ID', message: 'Invalid Id' };
-  }
+const blogPostUpdate = async (idUserToken, userId, body) => {
+  const dataPost = await getByIdPost(userId);
 
-  if (dataUser.userId !== idUserToken) {
+  if (dataPost.message.userId !== idUserToken) {
     return { type: 'PERMISSION_DENIED', message: 'Unauthorized user' };
   }
 
-  await BlogPost.update(body, { where: { idUserParam } });
-
-  return { type: null, message: dataUser };
+  await BlogPost.update(body, { where: { userId } });
+  
+  const updatePost = await getByIdPost(userId);
+  return { type: null, message: updatePost.message };
 };
 
 module.exports = {
