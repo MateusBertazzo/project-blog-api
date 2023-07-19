@@ -41,7 +41,23 @@ const getByIdPost = async (id) => {
   return { type: null, message: post };
 };
 
+const blogPostUpdate = async (idUserParam, dataBaseId, body) => {
+  const dataUser = await getByIdPost(dataBaseId);
+  if (!dataUser) {
+    return { type: 'INVALID_ID', message: 'Invalid Id' };
+  }
+
+  if (dataUser.userId !== idUserParam) {
+    return { type: 'PERMISSION_DENIED', message: 'Unauthorized user' };
+  }
+
+  await BlogPost.update(body, { where: { dataBaseId } });
+
+  return { type: null, message: dataUser };
+};
+
 module.exports = {
   getAllPost,
   getByIdPost,
+  blogPostUpdate,
 };

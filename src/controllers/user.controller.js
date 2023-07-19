@@ -6,7 +6,7 @@ const config = {
   algorithm: 'HS256', 
 };
 
-const TokenUser = (result) => jwt.sign(result, secret, config);
+const TokenUser = (payload) => jwt.sign(payload, secret, config);
 
 const loginUser = async (req, res) => {
   const { email, password } = req.body;
