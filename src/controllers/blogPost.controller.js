@@ -8,9 +8,7 @@ const getAllPost = async (_req, res) => {
 
 const getByIdPost = async (req, res) => {
   const { id } = req.params;
-  console.log(`DASDSADSADASDASdasdasdasdasdasdasdasdasdasdas ${id}`);
   const { type, message } = await blogPostService.getByIdPost(id);
-  console.log(message);
   if (type) {
     return res.status(404).json({ message });
   }
